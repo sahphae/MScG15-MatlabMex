@@ -21,7 +21,11 @@ triangular-matrix. Speeds up the whole SH synthesis by ~25%.
 
 #### Building MEX file:
 
-Build MEX file by calling Matlabs *mex*-command and linking needed librarys. 
+Build MEX file by calling Matlabs *mex*-command and linking needed librarys.  
+Eg.:
+```
+mex -I/usr/include/gsl/ -lgsl -lgslcblas -lm legendreFunctionsmx.c
+```
 
 #### Replace original Matlab function
 Copy the binary MEX file and m-function wrapper file to the
