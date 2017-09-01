@@ -4,7 +4,7 @@ MScG15-MatlabMex
 Mex-Files for MScG15 matlab_tools
 
 ## Functions:
-* [legendreFunctions](#legendreFunctions)
+* [legendreFunctions](#legendrefunctions)
 
 #### legendreFunctions
 Computation of the Legendre functions and arranging them in a lower 
