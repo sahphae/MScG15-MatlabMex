@@ -29,15 +29,15 @@ void mexFunction(int nlhs, mxArray *plhs[],        // output variables
 	double theta, cos_theta;
 	size_t max_deg;
 	int D;
-	int m_sum = 0;
-	int m, n;
+	int l_sum = 0;
+	int l, n;
 
 	theta = mxGetScalar(THETA_IN);
 	max_deg = (size_t) mxGetScalar(MAXDEG_IN);
 	cos_theta = cos(theta);
 
-	// get array of associated legendre polynomials for lower 
-	// triangular matrix of P
+	// get array of associated legendre polynomials 
+	// (schmidt semi-normalized) for lower triangular matrix of P
 	double legendre_array[gsl_sf_legendre_array_n(max_deg)];
 	if (gsl_sf_legendre_array_e(GSL_SF_LEGENDRE_SCHMIDT,
 	                            max_deg, 
@@ -55,16 +55,16 @@ void mexFunction(int nlhs, mxArray *plhs[],        // output variables
 	P = mxGetPr(P_OUT);
 
 	// write output matrix P
-	for (m = 0; m < D; m++) {
-		m_sum += m;
+	for (l = 0; l < D; l++) {
+		l_sum += l;
 		// lower triangular matrix
-		for (n = 0; n < m+1; n++) 
+		for (m = 0; m < l+1; m++) 
 			// get 4-pi normalization from multiplying with
-			// sqrt(2*m + 1)
-			P[m + D*n] = legendre_array[m_sum + n] * sqrt(2*m + 1);
+			// sqrt(2*l + 1)
+			P[l + D*m] = legendre_array[l_sum + m] * sqrt(2*l + 1);
 		// upper triangular matrix
-		for (n = m+1; n < D; n++)
-			P[m + D*n] = 0;
+		for (m = l+1; m < D; m++)
+			P[l + D*m] = 0;
 	}
 	return;
 }
