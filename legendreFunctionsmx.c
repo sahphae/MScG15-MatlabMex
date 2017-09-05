@@ -3,9 +3,9 @@
  *              and order at given specific co-latitude.
  *              Normalization given for example in 
  *              (cf (3.92), Torge, 2012, Geodesy):
- *              \bar{P}_{lm}(t) =
- *                sqrt(k(2l+1)((l-m)!/(l+m)!))P_{lm}(t),
- *              (k = 1 for m == 0, k = 2 for m != 0).
+ *                \bar{P}_{lm}(t) =
+ *                  sqrt(k(2l+1)((l-m)!/(l+m)!))P_{lm}(t),
+ *                (k = 1 for m == 0, k = 2 for m != 0).
  * Syntax: P = legendreFunctionsmx(theta, max_deg)
  * @input theta: scalar double co-latitude
  * @input max_degree: scalar int maximum degree
@@ -30,7 +30,7 @@ void mexFunction(int nlhs, mxArray *plhs[],        // output variables
 	size_t max_deg;
 	int D;
 	int l_sum = 0;
-	int l, n;
+	int l, m;
 
 	theta = mxGetScalar(THETA_IN);
 	max_deg = (size_t) mxGetScalar(MAXDEG_IN);
