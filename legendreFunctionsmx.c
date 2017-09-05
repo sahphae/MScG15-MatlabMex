@@ -1,6 +1,11 @@
 /* legendreFunctionsmx.c
  * Description: compute legendrefunctions (4pi-normalized) up to given degree
- *              and order at given specific co-latitude
+ *              and order at given specific co-latitude.
+ *              Normalization given for example in 
+ *              (cf (3.92), Torge, 2012, Geodesy):
+ *              \bar{P}_{lm}(t) =
+ *                sqrt(k(2l+1)((l-m)!/(l+m)!))P_{lm}(t),
+ *              (k = 1 for m == 0, k = 2 for m != 0).
  * Syntax: P = legendreFunctionsmx(theta, max_deg)
  * @input theta: scalar double co-latitude
  * @input max_degree: scalar int maximum degree
@@ -54,6 +59,8 @@ void mexFunction(int nlhs, mxArray *plhs[],        // output variables
 		m_sum += m;
 		// lower triangular matrix
 		for (n = 0; n < m+1; n++) 
+			// get 4-pi normalization from multiplying with
+			// sqrt(2*m + 1)
 			P[m + D*n] = legendre_array[m_sum + n] * sqrt(2*m + 1);
 		// upper triangular matrix
 		for (n = m+1; n < D; n++)
